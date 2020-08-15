@@ -3,7 +3,7 @@ from config import USERNAME, PASSWORD
 from selenium.webdriver.common.keys import Keys
 import time
 
-users = ["_aswin_asok_"]
+users = [""]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
 
@@ -34,14 +34,15 @@ for user in users:
     
     followerscountlist = browser.find_elements_by_class_name('wo9IH')
 
-    followersnamelist = browser.find_elements_by_class_name('d7ByH')
+    followersnamelist = browser.find_elements_by_class_name('Jv7Aj.MqpiF')
     
     outF = open("followers.txt", "w")
     i=0
     while i<len(followersnamelist):
-         outF.write(str(followersnamelist[i].text))
-         outF.write("\n")
-         i=i+1
+         if i != "Verified":
+          outF.write(str(followersnamelist[i].text))
+          outF.write("\n")
+          i=i+1
     outF.close()
 
     i=0
@@ -52,8 +53,6 @@ for user in users:
     
 browser.close()
 
-
-users = ["_aswin_asok_"]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
 
@@ -69,7 +68,7 @@ password_field.send_keys(PASSWORD)
 login_btn = browser.find_element_by_css_selector('button[type="submit"]')
 login_btn.click()
 
-time.sleep(10)
+time.sleep(20)
 
 for user in users:
     browser.get(f"https://www.instagram.com/{user}/")
@@ -80,19 +79,21 @@ for user in users:
     lists = browser.find_elements_by_class_name('LH36I')
     lists[2].click()
 
-    time.sleep(15)
+    time.sleep(20)
 
     followingcountlist = browser.find_elements_by_class_name('wo9IH')
 
-    followingnamelist = browser.find_elements_by_class_name('d7ByH')
+    followingnamelist = browser.find_elements_by_class_name('Jv7Aj.MqpiF')
     
+    print(len(followingnamelist))
     
     outF = open("following.txt", "w")
     i=0
     while i<len(followingnamelist):
-         outF.write(str(followingnamelist[i].text))
-         outF.write("\n")
-         i=i+1
+         if i != "Verified":
+          outF.write(str(followingnamelist[i].text))
+          outF.write("\n")
+          i=i+1
     outF.close()
 
     i=0
@@ -105,8 +106,9 @@ def nonFollowers(followers, followings):
 
      for i in followings :
          if i not in followers:
-             outF.write(i)
-             outF.write("\n")
+              if i != "Verified":
+                    outF.write(i)
+                    outF.write("\n")
      
      return nonFollowers
 
