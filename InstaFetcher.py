@@ -1,6 +1,5 @@
 from selenium import webdriver
-from config import USERNAME, PASSWORD
-from selenium.webdriver.common.keys import Keys
+from uspass import USERNAME, PASSWORD
 import time
 
 users = [""]
@@ -12,6 +11,7 @@ time.sleep(2)
 
 username_field = browser.find_element_by_name('username')
 username_field.send_keys(USERNAME)
+time.sleep(3)
 
 password_field = browser.find_element_by_name('password')
 password_field.send_keys(PASSWORD)
@@ -107,7 +107,7 @@ def nonFollowers(followers, followings):
      for i in followings :
          if i not in followers:
               if i != "Verified":
-                    outF.write(i)
+                    outF.write("@"+i)
                     outF.write("\n")
      
      return nonFollowers
