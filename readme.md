@@ -12,9 +12,7 @@ pip install Selenium
 You should also download the [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and set the path in <br> the 7th Line of Code <br>browser = webdriver.Chrome(executable_path='Path extracted of Chromedriver') 
 
 ## <center>Usage
-In the uspass.py enter your Instagram username and password.Then go to the InstaFetcher.py and enter the username of the profile for which you are Fetching the details in the users = [""], 5th Line of InstaFetcher.py.
-
-
+In the uspass.py enter your Instagram username and password.Run the program and follow the Instructions which provided in the console windows
 
 ## <center>Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
