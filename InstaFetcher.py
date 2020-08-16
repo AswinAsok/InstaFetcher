@@ -2,7 +2,7 @@ from selenium import webdriver
 from uspass import USERNAME, PASSWORD
 import time
 
-users = [""]
+users = [input("Username of The Profile To Fetch : ")]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
 
@@ -34,7 +34,8 @@ for user in users:
 
     print("Sleep Started\n")
     print("**Please Scroll Down The Entire List.\n")
-    time.sleep(30)
+    t1  = int(input("Enter the Time Required for Scrolling(in Seconds) : "))
+    time.sleep(t1)
     print("Sleep Over")
     
     followerscountlist = browser.find_elements_by_class_name('wo9IH')
@@ -45,14 +46,13 @@ for user in users:
 
     if len(followersnamelist)<int(followers.text):
           print("\nComplete list of follwers has not been retrieved please increase the sleep duration")
-          browser.close()
-          exit()
+          print("Proceeding with Accuracy : ",(len(followersnamelist)/int(followers.text))*100.0)
     else:
           print("\nComplete List of Follwers has been Retrived\n")
 
 
     outF = open("followers.txt", "w")
-    print("Writing the Usernames of Follwers to a Text File\n")
+    print("\nWriting the Usernames of Follwers to a Text File\n")
     
     i=0
     while i<len(followersnamelist):
@@ -80,7 +80,8 @@ for user in users:
     
     print("\nSleep Started\n")
     print("**Please Scroll Down The Entire List.\n")
-    time.sleep(30)
+    t2 = int(input("Enter the Time Required for Scrolling(in Seconds) : "))
+    time.sleep(t2)
     print("Sleep Over\n")
 
     followingcountlist = browser.find_elements_by_class_name('wo9IH')
@@ -91,14 +92,14 @@ for user in users:
 
     if len(followingnamelist)<int(following.text):
           print("\nComplete list of follwings has not been retrieved please increase the sleep duration")
-          browser.close()
-          exit()
+          print("Proceeding with Accuracy : ",(len(followingnamelist)/int(following.text))*100.0)
+
     else:
           print("\nComplete List of Follwings has been Retrived\n")
     
     
     outF = open("following.txt", "w")
-    print("Writing the Usernames of Follwings to a Text File\n")
+    print("\nWriting the Usernames of Follwings to a Text File\n")
     i=0
     while i<len(followingnamelist):
          if i != "Verified":
@@ -106,7 +107,7 @@ for user in users:
           outF.write("\n")
           i=i+1
     outF.close()
-    print("\nWriting Completed\n")
+    print("Writing Completed\n")
 
     i=0
     while i<len(followingnamelist):
@@ -126,7 +127,7 @@ def nonFollowers(followers, followings):
                     outF.write("@"+i)
                     outF.write("\n")
      print("\nNumber of Non-Followers : ",count)
-     print("\nWriting Completed\n")
+     print("\nWriting Completed")
      return nonFollowers
 
 nonFollowers(followersnamelist, followingnamelist)
