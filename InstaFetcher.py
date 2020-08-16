@@ -2,7 +2,7 @@ from selenium import webdriver
 from uspass import USERNAME, PASSWORD
 import time
 
-users = [""]
+users = ["_aswin_asok_"]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
 
@@ -11,7 +11,6 @@ time.sleep(2)
 
 username_field = browser.find_element_by_name('username')
 username_field.send_keys(USERNAME)
-time.sleep(3)
 
 password_field = browser.find_element_by_name('password')
 password_field.send_keys(PASSWORD)
@@ -19,100 +18,120 @@ password_field.send_keys(PASSWORD)
 login_btn = browser.find_element_by_css_selector('button[type="submit"]')
 login_btn.click()
 
-time.sleep(10)
+time.sleep(6)
 
 for user in users:
+
+    print("\n---------Fetching The Followers List---------")
     browser.get(f"https://www.instagram.com/{user}/")
 
     posts, followers, following = browser.find_elements_by_class_name('g47SY')
-    print(posts.text, followers.text, following.text)
+    print(f"\nTotal Posts: {posts.text}\nTotal Followers: {followers.text}\nTotal Followings: {following.text}\n")
     
     lists = browser.find_elements_by_class_name('LH36I')
     lists[1].click()
 
-    time.sleep(15)
+
+    print("Sleep Started\n")
+    print("**Please Scroll Down The Entire List.\n")
+    time.sleep(30)
+    print("Sleep Over")
     
     followerscountlist = browser.find_elements_by_class_name('wo9IH')
 
     followersnamelist = browser.find_elements_by_class_name('Jv7Aj.MqpiF')
     
+    print("\nTotal Number of Followers Aquired : ",len(followersnamelist))
+
+    if len(followersnamelist)<int(followers.text):
+          print("\nComplete list of follwers has not been retrieved please increase the sleep duration")
+          browser.close()
+          exit()
+    else:
+          print("\nComplete List of Follwers has been Retrived\n")
+
+
     outF = open("followers.txt", "w")
+    print("Writing the Usernames of Follwers to a Text File\n")
+    
     i=0
     while i<len(followersnamelist):
          if i != "Verified":
-          outF.write(str(followersnamelist[i].text))
+          outF.write("@"+str(followersnamelist[i].text))
           outF.write("\n")
           i=i+1
     outF.close()
+    print("Writing Completed\n")
 
     i=0
     while i<len(followersnamelist):
           followersnamelist[i] = str(followersnamelist[i].text)
           i=i+1
 
-    
-browser.close()
-
-
-browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
-
-browser.get("http://www.instagram.com/")
-time.sleep(2)
-
-username_field = browser.find_element_by_name('username')
-username_field.send_keys(USERNAME)
-
-password_field = browser.find_element_by_name('password')
-password_field.send_keys(PASSWORD)
-
-login_btn = browser.find_element_by_css_selector('button[type="submit"]')
-login_btn.click()
-
-time.sleep(20)
+print("\n------------Fetching the Followings List---------------")
 
 for user in users:
     browser.get(f"https://www.instagram.com/{user}/")
 
     posts, followers, following = browser.find_elements_by_class_name('g47SY')
-    print(posts.text, followers.text, following.text)
     
     lists = browser.find_elements_by_class_name('LH36I')
     lists[2].click()
-
-    time.sleep(20)
+    
+    print("\nSleep Started\n")
+    print("**Please Scroll Down The Entire List.\n")
+    time.sleep(30)
+    print("Sleep Over\n")
 
     followingcountlist = browser.find_elements_by_class_name('wo9IH')
 
     followingnamelist = browser.find_elements_by_class_name('Jv7Aj.MqpiF')
     
-    print(len(followingnamelist))
+    print("Total Number of Followings Aquired : ",len(followingnamelist))
+
+    if len(followingnamelist)<int(following.text):
+          print("\nComplete list of follwings has not been retrieved please increase the sleep duration")
+          browser.close()
+          exit()
+    else:
+          print("\nComplete List of Follwings has been Retrived\n")
+    
     
     outF = open("following.txt", "w")
+    print("Writing the Usernames of Follwings to a Text File\n")
     i=0
     while i<len(followingnamelist):
          if i != "Verified":
-          outF.write(str(followingnamelist[i].text))
+          outF.write("@"+str(followingnamelist[i].text))
           outF.write("\n")
           i=i+1
     outF.close()
+    print("\nWriting Completed\n")
 
     i=0
     while i<len(followingnamelist):
           followingnamelist[i] = str(followingnamelist[i].text)
           i=i+1
 
+print("-----------Finding Non-Followers------------\n")
+
 def nonFollowers(followers, followings):
      outF = open("nonFollowers.txt", "w")
-
+     print("Writing the list of non-followers to a Text File")
+     count = 0
      for i in followings :
          if i not in followers:
               if i != "Verified":
+                    count+=1
                     outF.write("@"+i)
                     outF.write("\n")
-     
+     print("\nNumber of Non-Followers : ",count)
+     print("\nWriting Completed\n")
      return nonFollowers
 
 nonFollowers(followersnamelist, followingnamelist)
+
+browser.close()
 
     
 
