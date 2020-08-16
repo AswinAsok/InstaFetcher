@@ -2,7 +2,7 @@ from selenium import webdriver
 from uspass import USERNAME, PASSWORD
 import time
 
-users = ["_aswin_asok_"]
+users = [""]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
 
