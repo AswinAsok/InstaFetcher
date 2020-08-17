@@ -5,8 +5,8 @@ import os
 
 load_dotenv()
 
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
+USERNAME = os.getenv("InstaUsername")
+PASSWORD = os.getenv("InstaPassword")
 users = [input("Username of The Profile To Fetch : ")]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
