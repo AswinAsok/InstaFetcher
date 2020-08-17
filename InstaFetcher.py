@@ -1,7 +1,12 @@
 from selenium import webdriver
-from uspass import USERNAME, PASSWORD
+from dotenv import load_dotenv
 import time
+import os
 
+load_dotenv()
+
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
 users = [input("Username of The Profile To Fetch : ")]
 
 browser = webdriver.Chrome(executable_path='C:/Users/Aswin Asok/chromedriver/chromedriver.exe')
@@ -27,7 +32,7 @@ for user in users:
 
     posts, followers, following = browser.find_elements_by_class_name('g47SY')
     print(f"\nTotal Posts: {posts.text}\nTotal Followers: {followers.text}\nTotal Followings: {following.text}\n")
-    
+
     lists = browser.find_elements_by_class_name('LH36I')
     lists[1].click()
 
@@ -37,11 +42,11 @@ for user in users:
     t1  = int(input("Enter the Time Required for Scrolling(in Seconds) : "))
     time.sleep(t1)
     print("Sleep Over")
-    
+
     followerscountlist = browser.find_elements_by_class_name('wo9IH')
 
     followersnamelist = browser.find_elements_by_class_name('Jv7Aj.MqpiF')
-    
+
     print("\nTotal Number of Followers Aquired : ",len(followersnamelist))
 
     if len(followersnamelist)<int(followers.text):
@@ -53,7 +58,7 @@ for user in users:
 
     outF = open("followers.txt", "w")
     print("\nWriting the Usernames of Follwers to a Text File\n")
-    
+
     i=0
     while i<len(followersnamelist):
          if i != "Verified":
@@ -74,10 +79,10 @@ for user in users:
     browser.get(f"https://www.instagram.com/{user}/")
 
     posts, followers, following = browser.find_elements_by_class_name('g47SY')
-    
+
     lists = browser.find_elements_by_class_name('LH36I')
     lists[2].click()
-    
+
     print("\nSleep Started\n")
     print("**Please Scroll Down The Entire List.\n")
     t2 = int(input("Enter the Time Required for Scrolling(in Seconds) : "))
@@ -87,7 +92,7 @@ for user in users:
     followingcountlist = browser.find_elements_by_class_name('wo9IH')
 
     followingnamelist = browser.find_elements_by_class_name('Jv7Aj.MqpiF')
-    
+
     print("Total Number of Followings Aquired : ",len(followingnamelist))
 
     if len(followingnamelist)<int(following.text):
@@ -96,8 +101,8 @@ for user in users:
 
     else:
           print("\nComplete List of Follwings has been Retrived\n")
-    
-    
+
+
     outF = open("following.txt", "w")
     print("\nWriting the Usernames of Follwings to a Text File\n")
     i=0
@@ -133,14 +138,3 @@ def nonFollowers(followers, followings):
 nonFollowers(followersnamelist, followingnamelist)
 
 browser.close()
-
-    
-
-
-    
-
-
-
-
-
-
