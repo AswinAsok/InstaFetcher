@@ -1,7 +1,7 @@
 # <p align = "center">The InstaFetcher</p>
 
 <p align="center">
-  <img src="Images\P1.jpg" width="200" >
+  <img src="Images\P1.jpg" height="500px" width = "450px" >
 </p>
 
 
