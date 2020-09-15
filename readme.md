@@ -1,10 +1,5 @@
 # <p align = "center">The InstaFetcher</p>
 
-<p align="center">
-  <img src="Images\P1.jpg" height="500px" width = "450px" >
-</p>
-
-
 The Insta-Fetcher is a Python Project which can be used to fetch the follwers,following and non-follwers user List of any user without the credentials of the user for whom we are fetching for and InstagramAPI.<br><br>This Project is still in development phase.Project will be frequently updated.
 
 ## Requirements
