@@ -39,11 +39,12 @@ lists[1].click()
 
 
 time.sleep(3)
-scr1 = browser.find_element_by_xpath('/html/body/div[4]/div/div/div[2]')
+scr1 = browser.find_element_by_xpath('/html/body/div[5]/div/div/div[2]')
 
-while not (str(len((browser.find_element_by_xpath("/html/body/div[4]/div/div/div[2]/ul/div")).find_elements_by_tag_name("li"))) == followers.text):
+while not ((len((browser.find_element_by_xpath("/html/body/div[5]/div/div/div[2]/ul/div")).find_elements_by_tag_name("li"))) == int(followers.text)):
       browser.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", scr1)
-
+      time.sleep(2)
+      
 
 followerscountlist = browser.find_elements_by_class_name('wo9IH')
 
@@ -90,10 +91,12 @@ lists = browser.find_elements_by_class_name('LH36I')
 lists[2].click()
 
 time.sleep(3)
-scr1 = browser.find_element_by_xpath('/html/body/div[4]/div/div/div[2]')
+scr1 = browser.find_element_by_xpath('/html/body/div[5]/div/div/div[2]')
 
-while not (str(len((browser.find_element_by_xpath("/html/body/div[4]/div/div/div[2]/ul/div")).find_elements_by_tag_name("li"))) == following.text):
+while not ((len((browser.find_element_by_xpath("/html/body/div[5]/div/div/div[2]/ul/div")).find_elements_by_tag_name("li"))) >= int(following.text)):
       browser.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", scr1)
+      time.sleep(1.5)
+      
 
 
 followingcountlist = browser.find_elements_by_class_name('wo9IH')
